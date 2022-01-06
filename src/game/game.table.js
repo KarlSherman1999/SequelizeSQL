@@ -21,4 +21,26 @@ const Game = sequelize.define("game",{
     },
 });
 
-module.exports = Game;
+const GameList = sequelize.define("gamelist",{
+    _id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
+    },
+    title:{
+        type: DataTypes.STRING,
+        allowNull : false,
+        unique: true
+    }
+});
+
+const associations = async () =>{
+    GameList.belongsToMany(Game,{through:"title"});
+    Game.belongsToMany(GameList,{through:"title"});
+    await sequelize.sync();
+}
+
+associations();
+
+module.exports = Game,GameList;
