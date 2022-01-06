@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../db/connection");
 
 const Game = sequelize.define("game",{
-    id: {
+    _id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -10,7 +10,8 @@ const Game = sequelize.define("game",{
     },
     title:{
         type: DataTypes.STRING,
-        allowNull : false
+        allowNull : false,
+        unique: true
     },
     genre:{
         type: DataTypes.STRING,
